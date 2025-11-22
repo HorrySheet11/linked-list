@@ -4,6 +4,9 @@ class HashMap {
 		this.capacity = 16;
 		this.map = new Array(this.capacity);
 	}
+	returnMap(){
+		return this.map;
+	}
 
 	hash(key) {
 		let hashCode = 0;
@@ -24,14 +27,21 @@ class HashMap {
 			this.map[bucketIndex] = [];
 		}
 		this.map[bucketIndex] = {key: key, value: value};
-		if(this.map.length > this.capacity * this.loadFactor){
+		let currentMapCount = 0;
+		for(let i = 0; i < this.map.length; i++){
+			if(this.map[i] !== undefined){
+				currentMapCount++;
+			}
+		}
+		if(currentMapCount > this.capacity * this.loadFactor){
 			this.resize();
 		}
 	}
 	resize(){
 		this.capacity *= 2;
+		// console.log(`capacity: ${this.capacity}`);
 		const oldMap = this.map;
-		this.map = new Array(Math.max(this.capacity, 0));
+		this.map = new Array(this.capacity);
 		for(let i = 0; i < oldMap.length; i++){
 			if(oldMap[i] !== undefined){
 				this.set(oldMap[i].key, oldMap[i].value);
@@ -40,11 +50,13 @@ class HashMap {
 	}
 
 	get(key) {
+		console.log('key: ', key);
 		if (!this.map[this.hash(key)]) {
 			return null;
 		}
 		return this.map[this.hash(key)].value;
 	}
+
 	has(key) {
 		return !!this.map[this.hash(key)];
 	}
@@ -69,7 +81,7 @@ class HashMap {
 		this.map = new Array(this.capacity);
 	}
 	keys(){
-		let keys = [];
+		const keys = [];
 		for(let i = 0; i < this.map.length; i++){
 			if(this.map[i] !== undefined){
 				keys.push(i);
@@ -78,7 +90,7 @@ class HashMap {
 		return keys;
 	}
 	values(){
-		let values = [];
+		const values = [];
 		for(let i = 0; i < this.map.length; i++){
 			if(this.map[i] !== undefined){
 				values.push(this.map[i]);
@@ -87,7 +99,7 @@ class HashMap {
 		return values;
 	}
 	entries(){
-		let entries = [];
+		const entries = [];
 		for(let i = 0; i < this.map.length; i++){
 			if(this.map[i] !== undefined){
 				entries.push([i, this.map[i]]);
@@ -111,6 +123,7 @@ test.set('jacket', 'blue')
 test.set('kite', 'pink')
 test.set('lion', 'golden')
 console.log(test.entries());
+console.log(test.returnMap());
 
-console.log(test.get[1]);
+console.log(`get apple: ${test.get('apple')}`);
 

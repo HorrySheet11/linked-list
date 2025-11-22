@@ -4,10 +4,6 @@ class HashMap {
 		this.capacity = 16;
 		this.map = new Array(this.capacity);
 	}
-	returnMap(){
-		return this.map;
-	}
-
 	hash(key) {
 		let hashCode = 0;
 		const primeNumber = 31;
@@ -50,7 +46,6 @@ class HashMap {
 	}
 
 	get(key) {
-		console.log('key: ', key);
 		if (!this.map[this.hash(key)]) {
 			return null;
 		}
@@ -78,13 +73,13 @@ class HashMap {
 		return count;
 	}
 	clear() {
-		this.map = new Array(this.capacity);
+		this.map = new Array(16);
 	}
 	keys(){
 		const keys = [];
 		for(let i = 0; i < this.map.length; i++){
-			if(this.map[i] !== undefined){
-				keys.push(i);
+			if(this.map[i]){
+				keys.push(this.map[i].key);
 			}
 		}
 		return keys;
@@ -92,8 +87,8 @@ class HashMap {
 	values(){
 		const values = [];
 		for(let i = 0; i < this.map.length; i++){
-			if(this.map[i] !== undefined){
-				values.push(this.map[i]);
+			if(this.map[i]){
+				values.push(this.map[i].value);
 			}
 		}
 		return values;
@@ -123,7 +118,14 @@ test.set('jacket', 'blue')
 test.set('kite', 'pink')
 test.set('lion', 'golden')
 console.log(test.entries());
-console.log(test.returnMap());
-
+console.log(`test.length: ${test.length()}`);
+console.log(`test.remove('frog')`);
+test.remove('frog')
+console.log(test.keys());
+console.log(test.values());
 console.log(`get apple: ${test.get('apple')}`);
+console.log('clear');
+test.clear();
+console.log(`test.length: ${test.length()}`);
+console.log(test.returnMap());
 

@@ -35,7 +35,6 @@ class HashMap {
 	}
 	resize(){
 		this.capacity *= 2;
-		// console.log(`capacity: ${this.capacity}`);
 		const oldMap = this.map;
 		this.map = new Array(this.capacity);
 		for(let i = 0; i < oldMap.length; i++){
@@ -118,14 +117,25 @@ test.set('jacket', 'blue')
 test.set('kite', 'pink')
 test.set('lion', 'golden')
 console.log(test.entries());
-console.log(`test.length: ${test.length()}`);
+ console.log(`test.length: ${test.length()}`);
 console.log(`test.remove('frog')`);
 test.remove('frog')
 console.log(test.keys());
 console.log(test.values());
 console.log(`get apple: ${test.get('apple')}`);
-console.log('clear');
-test.clear();
 console.log(`test.length: ${test.length()}`);
-console.log(test.returnMap());
+console.log(test.entries());
+test.set('car', 'cyan');
+test.set('pencil', 'black');
+test.set('melon', 'green');
+test.set('notebook', 'blue');
+test.set('orange', 'orange');
+test.set('quartz', 'gray');
+test.set('rainbow', 'rainbow');
+test.set('sun', 'yellow');
+test.set('tiger', 'golden');
+test.set('umbrella', 'black');
+test.set('vase', 'white');
+console.log(`test.length: ${test.length()}`);
+console.log(test.entries());
 
